@@ -11,9 +11,9 @@ export interface Product {
   img?: string;
 }
 export interface ProductContextProps {
-  counter: number;
-  increaseBy: (value: number) => void;
-  product: Product;
+  counter?: number;
+  increaseBy?: (value: number) => void;
+  product?: Product;
 }
 
 export interface ProductCardHOCProps {

@@ -6,15 +6,7 @@ import {
 } from "../interfaces/interfaces";
 import styles from "../styles/styles.module.css";
 
-const initContextState: ProductContextProps = {
-  counter: 0,
-  increaseBy: (value: number) => {},
-  product: {
-    id: "",
-    title: "",
-  },
-};
-export const ProductContext = createContext(initContextState);
+export const ProductContext = createContext({} as ProductContextProps);
 const { Provider } = ProductContext;
 
 export const ProductCard = ({ children, product }: ProductCardProps) => {
