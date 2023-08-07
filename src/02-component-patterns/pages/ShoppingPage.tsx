@@ -1,14 +1,16 @@
-import React from "react";
 import {
-  ProductTitle,
   ProductButtons,
-  ProductImage,
   ProductCard,
+  ProductImage,
+  ProductTitle,
 } from "../components";
+
+import "../styles/custom-styles.css";
+
 const product = {
   id: "1",
-  title: "Coffee Mug - Card",
   img: "./coffee-mug.png",
+  title: "Coffee Mug - Card",
 };
 
 export const ShoppingPage = () => {
@@ -24,15 +26,25 @@ export const ShoppingPage = () => {
           flexWrap: "wrap",
         }}
       >
-        <ProductCard product={product}>
-          <ProductCard.Image />
-          <ProductCard.Title />
-          <ProductCard.Buttons />
+        <ProductCard product={product} className="bg-dark text-white ">
+          <ProductCard.Image className="custom-image" />
+          <ProductCard.Buttons className="custom-buttons" />
+          <ProductCard.Title className="text-bold" />
         </ProductCard>
-        <ProductCard product={product}>
-          <ProductImage />
-          <ProductTitle title="cafe" />
-          <ProductButtons />
+
+        <ProductCard product={product} className="bg-dark text-white ">
+          <ProductImage
+            className="custom-image"
+            style={{ boxShadow: "10px 10px 10px rgba(0,0,0,0.2)" }}
+          />
+          <ProductButtons className="custom-buttons" />
+          <ProductTitle title="Cafe la famosa" className="text-bold" />
+        </ProductCard>
+
+        <ProductCard product={product} style={{ background: "#70d1f8" }}>
+          <ProductImage style={{ boxShadow: "10px 10px 10px rgba(0,0,0,1)" }} />
+          <ProductButtons style={{ display: "flex", justifyContent: "end" }} />
+          <ProductTitle title="Cafe la famosa" style={{ fontWeight: "bold" }} />
         </ProductCard>
       </div>
     </div>
