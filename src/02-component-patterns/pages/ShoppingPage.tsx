@@ -5,8 +5,8 @@ import {
   ProductImage,
   ProductTitle,
 } from "../components";
-import { Product, ProductInCart, onChangeArgs } from "../interfaces/interfaces";
-import { useShoppingCart } from "../hooks/useShoppingCart";
+import { Product, onChangeArgs } from "../interfaces/interfaces";
+
 import "../styles/custom-styles.css";
 
 const product1 = {
@@ -27,7 +27,23 @@ interface ProductInCard extends Product {
 }
 
 export const ShoppingPage = () => {
-  const { shoppingCart, onProductCountChange } = useShoppingCart();
+  const [shoppingCart, setShoppingCart] = useState<{
+    [key: string]: ProductInCard;
+  }>({});
+
+  const onProductCountChange = ({ count, product }: onChangeArgs) => {
+    setShoppingCart((oldShoppingCart) => {
+      if (count === 0) {
+        const { [product?.id]: value, ...rest } = oldShoppingCart;
+
+        return rest;
+      }
+      return {
+        ...oldShoppingCart,
+        [product.id]: { ...product, count },
+      };
+    });
+  };
 
   return (
     <div>
@@ -63,9 +79,8 @@ export const ShoppingPage = () => {
           <ProductCard
             key={key}
             product={product}
-            className="bg-dark text-white"
+            className="bg-dark text-white "
             style={{ width: "100px" }}
-            onChange={onProductCountChange}
           >
             <ProductImage
               className="custom-image"
@@ -80,10 +95,6 @@ export const ShoppingPage = () => {
             />
           </ProductCard>
         ))}
-      </div>
-
-      <div>
-        <code>{JSON.stringify(shoppingCart, null, 5)}</code>
       </div>
     </div>
   );
